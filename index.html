@@ -1,21 +1,46 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Gestione Appuntamenti</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Agenda</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<h1>Agenda</h1>
-<button onclick="logout()">Logout</button>
 
+<body>
+
+<h1>Agenda</h1>
+
+<button type="button" onclick="logout()">Logout</button>
+
+<!-- ================= PROFILO ================= -->
 <div class="card">
-  <button onclick="togglePromemoria()">➕ Nuovo Promemoria</button>
+  <button type="button" id="toggle-profilo-btn"> Modifica Profilo</button>
+
+  <div id="formProfilo" style="display:none; margin-top:10px;">
+    <label>Nome</label><br>
+    <input id="pnome"><br>
+
+    <label>Cognome</label><br>
+    <input id="pcognome"><br>
+
+    <label>Email</label><br>
+    <input id="pemail"><br>
+
+    <label>Telefono</label><br>
+    <input id="ptelefono"><br>
+
+    <label>Nuova password (opzionale)</label><br>
+    <input id="ppassword" type="password"><br><br>
+
+    <button type="button" onclick="salvaProfilo()">Salva</button>
+  </div>
+</div>
+
+<!-- ================= PROMEMORIA ================= -->
+<div class="card">
+  <button type="button" onclick="togglePromemoria()">➕ Nuovo Promemoria</button>
 
   <div id="formPromemoria" style="display:none; margin-top:10px;">
-    <h2>Nuovo Promemoria</h2>
-
     <label>Descrizione</label><br>
     <input id="pdesc"><br>
 
@@ -25,7 +50,7 @@
     <label>Ora</label><br>
     <input id="pora" type="time"><br>
 
-    <label>Durata (minuti)</label><br>
+    <label>Durata (min)</label><br>
     <input id="pdur" type="number"><br>
 
     <label>Ricorrenza</label><br>
@@ -35,20 +60,16 @@
       <option value="mensile">Mensile</option>
       <option value="annuale">Annuale</option>
     </select><br><br>
-     <button onclick="addPromemoria()">Salva Promemoria</button>
 
-  
-</div>
-
-   
+    <button type="button" onclick="addPromemoria()">Salva</button>
   </div>
 </div>
-  <div class="card">
-  <button onclick="toggleAppuntamento()">➕ Nuovo Appuntamento</button>
+
+<!-- ================= APPUNTAMENTI ================= -->
+<div class="card">
+  <button type="button" onclick="toggleAppuntamento()">➕ Nuovo Appuntamento</button>
 
   <div id="formAppuntamento" style="display:none; margin-top:10px;">
-    <h2>Nuovo Appuntamento</h2>
-
     <label>Descrizione</label><br>
     <input id="adesc"><br>
 
@@ -58,34 +79,33 @@
     <label>Ora</label><br>
     <input id="aora" type="time"><br>
 
-    <label>Durata (minuti)</label><br>
+    <label>Durata (min)</label><br>
     <input id="adur" type="number"><br>
 
-   <label>Email partecipanti (separate da virgola)</label><br>
-<input id="autenti"><br><br>
+    <label>Email partecipanti (separate da virgola)</label><br>
+    <input id="autenti"><br><br>
 
-
-    <button onclick="addAppuntamento()">Salva Appuntamento</button>
+    <button type="button" onclick="addAppuntamento()">Salva</button>
   </div>
+</div>
 
+<!-- ================= CALENDARIO ================= -->
 <div class="card">
-  <h2>Calendario</h2>
-
-  <button onclick="prevMonth()">◀</button>
+  <button type="button" onclick="prevMonth()">◀</button>
   <span id="monthLabel"></span>
-  <button onclick="nextMonth()">▶</button>
+  <button type="button" onclick="nextMonth()">▶</button>
 
   <div id="weekdays"></div>
   <div id="calendar"></div>
 </div>
 
+<!-- ================= EVENTI ================= -->
 <div class="card">
   <h2>Eventi del giorno</h2>
   <div id="eventi">Clicca un giorno</div>
 </div>
 
 <script src="js/index.js"></script>
-
 
 </body>
 </html>

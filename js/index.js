@@ -1,3 +1,11 @@
+const formProfilo = document.getElementById("formProfilo");
+const pnome = document.getElementById("pnome");
+const pcognome = document.getElementById("pcognome");
+const pemail = document.getElementById("pemail");
+const ptelefono = document.getElementById("ptelefono");
+const ppassword = document.getElementById("ppassword");
+document.getElementById("toggle-profilo-btn").onclick = toggleProfilo;
+
 let currentDate = new Date();
 let PROMEMORIA = [];
 let APPUNTAMENTI = [];
@@ -164,6 +172,43 @@ function nextMonth(){
   currentDate.setMonth(currentDate.getMonth()+1);
   renderCalendar();
 }
+
+function toggleProfilo(){
+  formProfilo.style.display =
+    formProfilo.style.display=="none" ? "block" : "none";
+
+  if(formProfilo.style.display=="block"){
+    caricaProfilo();
+  }
+}
+
+async function caricaProfilo(){
+  let r = await fetch("api/account.php");
+  let u = await r.json();
+
+  pnome.value = u.nome;
+  pcognome.value = u.cognome;
+  pemail.value = u.email;
+  ptelefono.value = u.telefono;
+}
+
+async function salvaProfilo(){
+  await fetch("api/account.php",{
+    method:"POST",
+    body: JSON.stringify({
+      nome: pnome.value,
+      cognome: pcognome.value,
+      email: pemail.value,
+      telefono: ptelefono.value,
+      password: ppassword.value
+    })
+  });
+
+  alert("Profilo aggiornato");
+  ppassword.value = "";
+  toggleProfilo();
+}
+
 
 // ---------------- INIT ----------------
 loadData();
